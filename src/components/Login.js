@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators} from 'redux';
+import { registerUser } from '../actions/usersAction';
 
 import '../App.css';
 import './Login.css';
@@ -10,7 +13,15 @@ class Login extends Component {
     return (
       <div className="container">
       <Nav />
-        <form>
+        <form onSubmit={ event => {
+          event.preventDefault()
+
+          const username = event.target.username.value
+          const password = event.target.password.value
+
+          this.props.registerUser(username, password)
+        }}>
+        
           <center><div>
             <label htmlFor="username"><strong>Username</strong></label>
             <input type="text" placeholder="Enter Username" name="username" required />
@@ -29,4 +40,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const actionCreators = {
+  registerUser:registerUser
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators( actionCreators, dispatch);
+ };
+ 
+ export default connect(mapDispatchToProps)(Login);

@@ -1,10 +1,11 @@
+
 const initialState = {
   isLoggedIn: false,
   userId: null,
   authToken: null
 };
 
-const user = (state = initialState, action) => {
+const UserReducer = (state = initialState, action) => {
     switch(action.type) {
       case 'LOGIN_USER_SUCCESS':
         return {
@@ -19,4 +20,4 @@ const user = (state = initialState, action) => {
     }
 }
   
-export default user
+export default UserReducer;

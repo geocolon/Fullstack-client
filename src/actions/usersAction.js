@@ -39,7 +39,7 @@ export const loginUser = (username, password) => dispatch => {
       localStorage.setItem('authToken', response.authToken)
       localStorage.setItem('userId', response.userId)
       dispatch(loginUserSuccess(response.userId, response.authToken))
-      history.push('/dashboard')
+      // history.push('/dashboard')
   
     })
     .catch(error => console.log(error))
