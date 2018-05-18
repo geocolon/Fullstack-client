@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
 
-import './App.css';
+import '../App.css';
 import './Login.css';
 
 class Landing extends Component {
