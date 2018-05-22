@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Nav from './Nav';
 
 import '../App.css';
-import './Login.css';
+import '../containers/Login.css';
+import { fetchData } from '../actions';
 
 
 class Landing extends Component {
-  
-  
+    
   
   render() {
     return (

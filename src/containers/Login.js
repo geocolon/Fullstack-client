@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
+import Nav from '../components/Nav';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators} from 'redux';
-import { registerUser } from '../actions/usersAction';
+import { bindActionCreators } from 'redux';
 
 import '../App.css';
 import './Login.css';
 
 class Login extends Component {
+  
+  
+
   render() {
     return (
       <div className="container">
@@ -19,7 +21,6 @@ class Login extends Component {
           const username = event.target.username.value
           const password = event.target.password.value
 
-          this.props.registerUser(username, password)
         }}>
         
           <center><div>
@@ -30,7 +31,12 @@ class Login extends Component {
           </div>
           </center>
           <center><button id="login"><strong>Login</strong></button></center>
-
+          {this.props.loading ? 
+          <p>Loading...</p>
+          :
+          console.log(this.props.users)
+          }
+          {this.props.children}
           <div className="container">
             <p className="form-ptag">Don’t have an account? <br /> <Link to="/signup"><strong>Create one here.</strong></Link></p>
           </div>
@@ -40,12 +46,17 @@ class Login extends Component {
   }
 }
 
-const actionCreators = {
-  registerUser:registerUser
-}
+// const actionCreators = {
+//   fetchData
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators( actionCreators, dispatch);
- };
- 
- export default connect(mapDispatchToProps)(Login);
+// const mapStateToProps = (state) => ({
+//   users: state.users.data,
+//   loading: state.users.loading
+// })
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators( actionCreators, dispatch);
+//  };
+// connect(mapStateToProps, mapDispatchToProps)
+ export default Login;
