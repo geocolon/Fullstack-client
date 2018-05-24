@@ -3,7 +3,6 @@ import Nav from './Nav';
 
 import '../App.css';
 import '../containers/Login.css';
-import { fetchData } from '../actions';
 
 
 class Landing extends Component {

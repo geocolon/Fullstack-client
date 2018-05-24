@@ -3,6 +3,7 @@ import Nav from '../components/Nav';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import UsersAction from '../actions/usersAction';
 
 import '../App.css';
 import './Login.css';
@@ -20,7 +21,7 @@ class Login extends Component {
 
           const username = event.target.username.value
           const password = event.target.password.value
-
+          this.props.setLoginNew(username, password);
         }}>
         
           <center><div>
@@ -46,17 +47,17 @@ class Login extends Component {
   }
 }
 
-// const actionCreators = {
-//   fetchData
-// }
+const actionCreators = {
+  setLoginNew: UsersAction.setLoginNew
+}
 
-// const mapStateToProps = (state) => ({
-//   users: state.users.data,
-//   loading: state.users.loading
-// })
+const mapStateToProps = (state) => ({
+  users: state.users.data,
+  loading: state.users.loading
+})
 
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators( actionCreators, dispatch);
-//  };
-// 
- export default connect(mapStateToProps, mapDispatchToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators( actionCreators, dispatch);
+ };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
