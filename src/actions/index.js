@@ -1,36 +1,17 @@
-/*
- * action types
- */
+import API_BASE_URL from '../config';
+import UserReducer from '../reducers/index';
+import Axios from 'axios';
 
-export const USER_ADD = 'USER_ADD';
-export const USER_LOGIN = 'USER_LOGIN';
+export const FETCH_POSTS = 'FETCH_POST';
+const API_KEY = '?key=123_456_key';
 
-export function userAdd(username, password) {
-  return { "type": "USER_ADD", "payload": "text" }
-}
-
-export function userLogin(username, password) {
-  return {type: USER_LOGIN, username, password}
-}
-
-
-
-
-// const requestData = () => ({
-//   type: 'REQUEST_DATA'
-// });
-
-// const recieveData = (data) => ({
-//   type: 'RECIEVE_DATA',
-//   data
-// });
-
-// export const fetchData = () => {
-//     return (dispatch) => {
-//         dispatch(requestData)
-//         fetch('/users.json')
-//         .then(response => response.json())
-//         .then(json => console.log(json))
-//         .catch(ex => console.log('parsing Failed', ex))
-//     }
-// }        
+export const fetchPost = () => dispatch => {
+  fetch(`${API_BASE_URL}/api`).then(res => {
+      if (!res.ok) {
+          return Promise.reject(res.statusText);
+      }
+      return res.json();
+  }).then(board => {
+      dispatch(fetchBoardSuccess(users));
+  });
+};

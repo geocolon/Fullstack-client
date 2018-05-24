@@ -4,12 +4,15 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UsersAction from '../actions/usersAction';
+import {fetchPost} from '../actions/index';
 
 import '../App.css';
 import './Login.css';
 
 class Login extends Component {
-  
+  componentDidMount() {
+    this.props.dispatch(fetchPost());
+  }
   
 
   render() {
