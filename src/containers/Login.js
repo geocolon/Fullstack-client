@@ -3,15 +3,14 @@ import Nav from '../components/Nav';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import UsersAction from '../actions/usersAction';
-import {fetchPost} from '../actions/index';
+import * as UserActions from '../actions/usersAction';
 
 import '../App.css';
 import './Login.css';
 
 class Login extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchPost());
+    // this.props.fetchUsers(); 
   }
   
 
@@ -24,7 +23,7 @@ class Login extends Component {
 
           const username = event.target.username.value
           const password = event.target.password.value
-          this.props.setLoginNew(username, password);
+          this.props.setLoginNew({username, password}); // ** should be async action here
         }}>
         
           <center><div>
@@ -51,7 +50,7 @@ class Login extends Component {
 }
 
 const actionCreators = {
-  setLoginNew: UsersAction.setLoginNew
+  setLoginNew: UserActions.loginUser // This is my async action
 }
 
 const mapStateToProps = (state) => ({
@@ -61,6 +60,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators( actionCreators, dispatch);
+  
  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

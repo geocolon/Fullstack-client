@@ -1,31 +1,35 @@
 import {type} from '../actions/usersAction';
 
 export default function reducer(state = {
-  isLoginSuccess: false,
-  isLoginPending: false,
-  loginError: null
+  // isLoginSuccess: false,
+  // isLoginPending: false,
+  // loginError: null
+
+  isFetching: false,
+  isAuthenticated: localStorage.getItem('id_token') ? true : false
 }, action) {
   switch (action.type) {
-    case type.SET_LOGIN_PENDING:
+    case type.LOGIN_REQUEST:
       return Object.assign({}, state, {
         isLoginPending: action.isLoginPending
       });
 
-    case type.SET_LOGIN_SUCCESS:
+    case type.LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isLoginSuccess: action.isLoginSuccess
       });
 
-    case type.SET_LOGIN_ERROR:
+    case type.LOGIN_FAILURE:
       return Object.assign({}, state, {
         loginError: action.loginError
       });
-
-    case type.SET_LOGIN_NEW:
+    
+    case type.LOGOUT_SUCCESS:
     return Object.assign({}, state, {
-      username: action.username,
-      password: action.password
-    });  
+      isFetching: true,
+      isAuthenticated: false
+    });
+
 
     default:
       return state;
