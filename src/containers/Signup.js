@@ -1,51 +1,69 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Field, reduxForm, focus} from 'redux-form';
+import {registerUser} from '../actions/users';
+import {login} from '../actions/auth';
+import Input from './input';
+import './Signup.css';
+import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
+const passwordLength = length({min: 10, max: 72});
+const matchesPassword = matches('password');
 
-import Nav from '../components/Nav';
-import {Link} from 'react-router-dom';
-// import {required, nonEmpty} from '../vaildators'; // Async action
+class RegistrationForm extends React.Component {
+    onSubmit(values) {
+        console.log('This is the values',values)
+        const {username, password, firstname, lastname} = values;
+        const user = {username, password, firstname, lastname};
+        return this.props
+            .dispatch(registerUser(user))
+            .then(() => this.props.dispatch(login(username, password)));
+    }
 
-import '../App.css';
-import './Login.css';
-
-class Signup extends Component {
-  onSubmit(values) {
-    console.log(values);
-    return this.props.dispatch(values.username, values.password)
-  }
-
-
-  render() {    
-
-    return (
-      <div className="container">
-      <Nav />
-        <form>
-          <center><div>
-            <label htmlFor="firstname"><strong>First Name</strong></label>
-            <input type="text" placeholder="Enter First Name" name="firstname" required />
-
-
-            <label htmlFor="lastname"><strong>Last name</strong></label>
-            <input type="text" placeholder="Enter Username" name="lastname" required />
-
-            <label htmlFor="username"><strong>Username</strong></label>
-            <input type="text" placeholder="Enter Username" name="username" required />
-
-            <label htmlFor="password"><strong>Password</strong></label>
-            <input type="password" placeholder="Enter Password" name="password" required />
-            <label htmlFor="re-password"><strong>Re-enter Password</strong></label>
-            <input type="re-password" placeholder="Re-enter Password" name="re-password" required />
-          </div>
-          </center>
-          <center><button id="create"><strong>Account Create</strong></button></center>
-
-          <div className="container">
-            <p className="form-ptag">Already have an account? <br /> <Link to="/login"><strong>Login here.</strong></Link></p>
-          </div>
-        </form>
-      </div>
-    );
-  }
+    render() {
+        return (
+        <div>
+            <form
+                className="login-form"
+                onSubmit={this.props.handleSubmit(values =>
+                    this.onSubmit(values)
+                )}>
+                <label htmlFor="firstname">First name</label>
+                <Field component="input" type="text" name="firstname" />
+                <label htmlFor="lastname">Last name</label>
+                <Field component={Input} type="text" name="lastname" />
+                <label htmlFor="username">Username</label>
+                <Field
+                    component={Input}
+                    type="text"
+                    name="username"
+                    validate={[required, nonEmpty, isTrimmed]}
+                />
+                <label htmlFor="password">Password</label>
+                <Field
+                    component={Input}
+                    type="password"
+                    name="password"
+                    validate={[required, passwordLength, isTrimmed]}
+                />
+                <label htmlFor="passwordConfirm">Confirm password</label>
+                <Field
+                    component={Input}
+                    type="password"
+                    name="passwordConfirm"
+                    validate={[required, nonEmpty, matchesPassword]}
+                />
+                <button
+                    type="submit"
+                    >
+                    Register
+                </button>
+            </form>
+        </div>    
+        );
+    }
 }
 
-export default Signup;
+export default reduxForm({
+    form: 'registration',
+    // onSubmitFail: (errors, dispatch) =>
+    //     dispatch(focus('registration', Object.keys(errors)[0]))
+})(RegistrationForm);
