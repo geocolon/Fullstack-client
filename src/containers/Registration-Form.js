@@ -3,7 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import Input from './input';
-import './Signup.css';
+import './Registration-Form.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
@@ -64,6 +64,6 @@ class RegistrationForm extends React.Component {
 
 export default reduxForm({
     form: 'registration',
-    // onSubmitFail: (errors, dispatch) =>
-    //     dispatch(focus('registration', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('registration', Object.keys(errors)[0]))
 })(RegistrationForm);

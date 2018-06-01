@@ -1,0 +1,31 @@
+form {
+    widows: 80%; 
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+ }
+ 
+ button {
+     background-color: #45EBA5;
+     border-radius: 5px;
+     color: #ffffff;
+     margin-top: 3em;
+     margin-bottom: 1em;
+     width: 30%;
+     height: 40px;
+ }
+ 
+ label {
+     text-align: left;
+ }
+ 
+ label, input {
+     display: inline-block;
+     width: 50%;
+     padding: 1%;
+ }
+ 
+ .form-ptag {
+     text-align: center;
+ }

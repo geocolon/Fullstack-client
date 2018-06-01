@@ -1,66 +1,55 @@
-import React, { Component } from 'react';
-import Nav from '../components/Nav';
-import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as UserActions from '../actions/usersAction';
+import React from 'react';
+import {Field, reduxForm, focus} from 'redux-form';
+import Input from './input';
+import {login} from '../actions/auth';
+import {required, nonEmpty} from '../validators';
 
-import '../App.css';
-import './Login.css';
+export class LoginForm extends React.Component {
+    onSubmit(values) {
+        return this.props.dispatch(login(values.username, values.password));
+    }
 
-class Login extends Component {
-  componentDidMount() {
-    // this.props.fetchUsers(); 
-  }
-  
-
-  render() {
-    return (
-      <div className="container">
-      <Nav />
-        <form onSubmit={ event => {
-          event.preventDefault()
-
-          const username = event.target.username.value
-          const password = event.target.password.value
-          this.props.setLoginNew({username, password}); // ** should be async action here
-        }}>
-        
-          <center><div>
-            <label htmlFor="username"><strong>Username</strong></label>
-            <input type="text" placeholder="Enter Username" name="username" required />
-            <label htmlFor="password"><strong>Password</strong></label>
-            <input type="password" placeholder="Enter Password" name="password" required />
-          </div>
-          </center>
-          <center><button id="login"><strong>Login</strong></button></center>
-          {this.props.loading ? 
-          <p>Loading...</p>
-          :
-          console.log(this.props.users)
-          }
-          {this.props.children}
-          <div className="container">
-            <p className="form-ptag">Don’t have an account? <br /> <Link to="/signup"><strong>Create one here.</strong></Link></p>
-          </div>
-        </form>
-      </div>
-    );
-  }
+    render() {
+        let error;
+        if (this.props.error) {
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.error}
+                </div>
+            );
+        }
+        return (
+            <form
+                className="login-form"
+                onSubmit={this.props.handleSubmit(values =>
+                    this.onSubmit(values)
+                )}>
+                {error}
+                <label htmlFor="username">Username</label>
+                <Field
+                    component={Input}
+                    type="text"
+                    name="username"
+                    id="username"
+                    validate={[required, nonEmpty]}
+                />
+                <label htmlFor="password">Password</label>
+                <Field
+                    component={Input}
+                    type="password"
+                    name="password"
+                    id="password"
+                    validate={[required, nonEmpty]}
+                />
+                <button disabled={this.props.pristine || this.props.submitting}>
+                    Log in
+                </button>
+            </form>
+        );
+    }
 }
 
-const actionCreators = {
-  setLoginNew: UserActions.loginUser // This is my async action
-}
-
-const mapStateToProps = (state) => ({
-  users: state.users.data,
-  loading: state.users.loading
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators( actionCreators, dispatch);
-  
- };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default reduxForm({
+    form: 'login',
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+})(LoginForm);

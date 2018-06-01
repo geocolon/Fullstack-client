@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Nav from '../components/Nav';
-import RegistrationForm from '../containers/Signup';
+import RegistrationForm from '../containers/Registration-Form';
 import {Link, Redirect} from 'react-router-dom';
 
 export class RegistrationPage extends React.Component {
@@ -17,7 +17,7 @@ export class RegistrationPage extends React.Component {
                 <Nav />
                 <h2>Register for App</h2>
                 <RegistrationForm />
-                <Link to="/">Login</Link>
+                <Link to="/login">Login</Link>
             </div>    
         );
     } 
