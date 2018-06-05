@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 
-export class Logout extends React.Component {
+export class HeaderBar extends React.Component {
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -18,7 +18,8 @@ export class Logout extends React.Component {
             );
         }
         return (
-            <div>
+            <div className="header-bar">
+                <h1>App</h1>
                 {logOutButton}
             </div>
         );
@@ -28,4 +29,5 @@ export class Logout extends React.Component {
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null
 });
-export default connect(mapStateToProps)(Logout);
+
+export default connect(mapStateToProps)(HeaderBar);

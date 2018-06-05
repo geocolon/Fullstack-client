@@ -10,7 +10,8 @@ export const fetchPost = () => dispatch => {
           return Promise.reject(res.statusText);
       }
       return res.json();
-  }).then(board => {
+  }).then(users => {
+      console.log('This is in the',users);
       dispatch(setLoginSuccess(users));
   });
 };
