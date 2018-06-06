@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route} from 'react-router-dom';
-import Login from './containers/Login';
+import Login from './components/login-page';
 import Dashboard from './containers/Dashboard';
 import Logout from './containers/Logout';
 import About from './components/About';

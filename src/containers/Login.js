@@ -1,7 +1,6 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
-import Nav from '../components/Nav';
 import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
@@ -21,7 +20,6 @@ export class LoginForm extends React.Component {
         }
         return (
           <div>
-            <Nav />
             <form
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
