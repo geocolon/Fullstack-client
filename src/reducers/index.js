@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import UsersReducer from './userReducer';
+import NoteReducer from './noteReducer';
 import AuthReducer from './authReducer';
 import Protecteddata from './protected-data';
 import { reducer as reduxFormReducer } from 'redux-form';
@@ -7,7 +7,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
   form: reduxFormReducer, // mounted under "form"
-  // users: UsersReducer,
+  notes: NoteReducer,
   protected: Protecteddata,
   auth: AuthReducer
 })

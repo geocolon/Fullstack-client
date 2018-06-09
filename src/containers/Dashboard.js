@@ -1,12 +1,18 @@
 import React from 'react';
+import {Field, reduxForm, focus} from 'redux-form';
+import {createNotes} from '../actions/notes';
 import Nav from '../components/Nav';
-import {connect} from 'react-redux';
-import requiresLogin from '../components/requires-login';
-import {fetchProtectedData} from '../actions/protected-data';
 
 export class Dashboard extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchProtectedData());
+
+    onSubmit(values) {
+        console.log('This is the values',values);
+        const {name,text} =values;
+        // const {username, password, firstname, lastname} = values;
+        // const user = {username, password, firstname, lastname};
+        return this.props
+            .dispatch(createNotes(note))
+            .then(() => this.props.dispatch(login(username, password)));
     }
 
     render() {
@@ -20,18 +26,35 @@ export class Dashboard extends React.Component {
                 <div className="dashboard-protected-data">
                     Protected data: {this.props.protectedData}
                 </div>
+
+                <form
+                    className="content-form"
+                    onSubmit={this.props.handleSubmit(values =>
+                        this.onSubmit(values)
+                    )}>
+                    <label htmlFor="title">Title</label>
+                    <Field component="input" type="text" name="title" />
+
+                    <label htmlFor="imageurl">Image URL</label>
+                    <Field
+                        component="input"
+                        type="text"
+                        name="imageurl"
+                    />
+                    <button
+                    type="submit"
+                    >
+                    Submit
+                    </button>
+                </form>    
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    const {currentUser} = state.auth;
-    return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstname} ${currentUser.lastname}`,
-        protectedData: state.protected.data
-    };
-};
 
-export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+export default reduxForm({
+    form: 'dashboard',
+    onSubmitFail: (errors, dispatch) =>
+    dispatch(focus('dashboard', Object.keys(errors)[0]))
+})(Dashboard);

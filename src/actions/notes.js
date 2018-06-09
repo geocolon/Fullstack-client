@@ -1,4 +1,4 @@
-import API_BASE_URL from '../config';
+import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {SubmissionError} from 'redux-form';
 
@@ -20,9 +20,9 @@ export const noteError = error => ({
     error
 });
 
-export const getNotes = note => dispatch => {
+export const createNotes = note => dispatch => {
 return fetch(`${API_BASE_URL}/notes`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
