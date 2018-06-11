@@ -1,4 +1,4 @@
-import { NOTE_REQUEST, NOTE_SUCCESS, NOTE_ERROR } from '../actions/notes';
+import { REQUEST_DATA, RECIVEVE_DATA } from '../actions/notes';
 
 const initialState = {
     notes: null,
@@ -6,22 +6,13 @@ const initialState = {
     error: null
 };
 
-export default function reducer(state = initialState, action) {
-    if (action.type === NOTE_REQUEST) {
-        return Object.assign({}, state, {
-            loading: true,
-            error: null
-        });
-    } else if (action.type === NOTE_SUCCESS) {
-        return Object.assign({}, state, {
-            loading: true,
-            notes: action.notes
-        });
-    } else if (action.type === NOTE_ERROR) {
-        return Object.assign({}, state, {
-            loading: false,
-            notes: action.error
-        });
+export default function notes(state = initialState, action) {
+    switch(action.type){
+        case 'REQUEST_DATA':
+            return {}
+        case 'RECIVEVE_DATA':
+            return {}
+        default:
+            return state
     }
-    return state;
 }

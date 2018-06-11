@@ -1,18 +1,19 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
-import {createNotes} from '../actions/notes';
 import Nav from '../components/Nav';
+import {createNotes} from '../actions/notes';
+
+
+
 
 export class Dashboard extends React.Component {
+    
 
     onSubmit(values) {
-        console.log('This is the values',values);
-        const {name,text} =values;
+        // console.log('This is the values',values);
         // const {username, password, firstname, lastname} = values;
         // const user = {username, password, firstname, lastname};
-        return this.props
-            .dispatch(createNotes(note))
-            .then(() => this.props.dispatch(login(username, password)));
+        return this.props.dispatch(createNotes(values.imageurl, values.title));
     }
 
     render() {
@@ -46,7 +47,7 @@ export class Dashboard extends React.Component {
                     >
                     Submit
                     </button>
-                </form>    
+                </form>  
             </div>
         );
     }

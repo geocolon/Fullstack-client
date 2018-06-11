@@ -3,21 +3,15 @@ import {normalizeResponseErrors} from './utils';
 import {SubmissionError} from 'redux-form';
 
 
-export const NOTE_REQUEST = 'NOTE_REQUEST';
-export const noteRequest = () => ({
-    type: NOTE_REQUEST
+export const REQUEST_DATA = 'REQUEST_DATA';
+export const requestNotes = () => ({
+    type: REQUEST_DATA
 });
 
-export const NOTE_SUCCESS = 'NOTE_SUCCESS';
-export const noteSuccess = currentUser => ({
-    type: NOTE_SUCCESS,
-    currentUser
-});
-
-export const NOTE_ERROR = 'NOTE_ERROR';
-export const noteError = error => ({
-    type: NOTE_ERROR,
-    error
+export const RECIVEVE_DATA = 'RECIVEVE_DATA';
+export const addNotes = notes => ({
+    type: RECIVEVE_DATA,
+    notes
 });
 
 export const createNotes = note => dispatch => {
@@ -30,6 +24,7 @@ return fetch(`${API_BASE_URL}/notes`, {
 })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
+    .then(console.log('This is the actions api...'))
     .catch(err => {
         const {reason, message, location} = err;
         if (reason === 'ValidationError') {
