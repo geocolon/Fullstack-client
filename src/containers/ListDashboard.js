@@ -9,17 +9,24 @@ class ListDashboard extends React.Component {
         this.props.dispatch(fetchNote());
         // console.log('this is props',this.props);
     }
-
-    handleClick(values) {
-        return this.props.dispatch(deleteNote(values.id));
-    }
+    // handleClick = () => {
+    //     console.log('This is where I will place the delete',this.props);
+    //     console.log('this is:', this.props.lists[0].id);
+    //     // this.props.dispatch(deleteNote(this.list.id));
+    //   }
+    
 
 
     render(){
+
         let lists;
         if(this.props.lists){
             lists = this.props.lists.map((list, index) => (
-                    <div className="col-6" key={index}><div className="card-style"><img src={list.text} alt={list.name}/><button>Delete</button></div></div>
+                    <div className="col-6" key={list.id}><div className="card-style"><img src={list.text} alt={list.name}/><button className="delete-btn" onClick={ (index) => {
+                        this.props.dispatch(deleteNote(list.id));
+                        console.log('this is the id', list.id );    
+                    }
+                }>Delete</button></div></div>
             ));
         }
         

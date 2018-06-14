@@ -30,30 +30,40 @@ export const deleteNoteRequest = () => ({
     type: DELETE_NOTE_REQUEST,
 });
 
-export const deleteNote = (id) => dispatch => {
-    fetch(`${API_BASE_URL}/notes/:${id}`).then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.status(204);
-    }).then(note => {
-        dispatch(deleteNoteRequest(note));
-    });
-};
-
-
 export const fetchNote = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     // const userName = getState().auth.currentUser.username;
-    return fetch(`${API_BASE_URL}/notes`).then(res => {     
+    return fetch(`${API_BASE_URL}/notes`,{
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    }).then(res => {     
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         return res.json();
     }).then(note => {
-        console.log(note);
         dispatch(fetchNoteSuccess(note));
     });
+};
+
+export const deleteNote = (id) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/notes/${id}`,{
+        method: 'DELETE',
+        headers: {
+        Authorization: `Bearer ${authToken}`
+    }
+}).then(res => {
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+    })
+    .then(() => {
+        dispatch(fetchNote());
+        // deleteNoteRequest(fetchNote(note));
+    })
 };
 
 export const createNotes = (note, title) => (dispatch, getState) => {
@@ -70,8 +80,9 @@ return fetch(`${API_BASE_URL}/notes`, {
 })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
+    .then(()=>dispatch(fetchNote()))
     .then(console.log('This is the actions api...'))
-    .then(note => dispatch(finishPost(note)))
+    .then(() => dispatch(finishPost()))
     .catch(err => {
         const {reason, message, location} = err;
         if (reason === 'ValidationError') {

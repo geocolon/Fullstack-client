@@ -21,14 +21,6 @@ export class Dashboard extends React.Component {
             <div>
             <div className="container">
                 
-                {/* <div className="dashboard-username">
-                    Username: {this.props.username}
-                </div>
-                <div className="dashboard-name">Name: {this.props.name}</div>
-                <div className="dashboard-protected-data">
-                    Protected data: {this.props.protectedData}
-                </div> */}
-
                 <form
                     className="content-form"
                     onSubmit={this.props.handleSubmit(values =>
