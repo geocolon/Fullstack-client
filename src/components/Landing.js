@@ -10,13 +10,15 @@ class Landing extends Component {
   
   render() {
     return (
-      <div className="container">
-      <Nav />
-        <main>
-          <h1>
-            <strong>This will be Landing page!</strong>
-          </h1>
-        </main>
+      <div>
+        <Nav />
+          <div className="container">
+            <main>
+              <h1>
+                <strong>This will be Landing page!</strong>
+              </h1>
+            </main>
+          </div>
       </div>
     );
   }

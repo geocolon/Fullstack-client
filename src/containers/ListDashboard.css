@@ -1,0 +1,23 @@
+h2 {
+   text-align: center; 
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card-style {
+    text-align: center;
+    word-wrap: break-word;
+    background-color: orange;
+    padding: 1%;
+    width: 100%;
+    border:1px solid #e5e5e5;
+    margin-bottom: 20px; 
+}
+
+.list-wrapper {
+    margin: 5% 5%;
+}

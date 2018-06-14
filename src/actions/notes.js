@@ -3,28 +3,75 @@ import {normalizeResponseErrors} from './utils';
 import {SubmissionError} from 'redux-form';
 
 
-export const REQUEST_DATA = 'REQUEST_DATA';
-export const requestNotes = () => ({
-    type: REQUEST_DATA
+export const POST_NOTE_REQUEST = 'POST_NOTE_REQUEST';
+export const startPosting = () => ({
+    type: POST_NOTE_REQUEST
 });
 
-export const RECIVEVE_DATA = 'RECIVEVE_DATA';
-export const addNotes = notes => ({
-    type: RECIVEVE_DATA,
+export const POST_NOTE_SUCCESS = 'POST_NOTE_SUCCESS';
+export const finishPost = notes => ({
+    type: POST_NOTE_SUCCESS,
     notes
 });
 
-export const createNotes = note => dispatch => {
+export const FETCH_NOTE_SUCCESS = 'FETCH_NOTE_SUCCESS';
+export const fetchNoteSuccess = notes => ({
+    type: FETCH_NOTE_SUCCESS,
+    notes
+});
+
+export const FETCH_NOTE_REQUEST = 'FETCH_NOTE_REQUEST';
+export const fetchNoteRequest = () => ({
+    type: FETCH_NOTE_REQUEST,
+});
+
+export const DELETE_NOTE_REQUEST = 'DELETE_NOTE_REQUEST';
+export const deleteNoteRequest = () => ({
+    type: DELETE_NOTE_REQUEST,
+});
+
+export const deleteNote = (id) => dispatch => {
+    fetch(`${API_BASE_URL}/notes/:${id}`).then(res => {
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        return res.status(204);
+    }).then(note => {
+        dispatch(deleteNoteRequest(note));
+    });
+};
+
+
+export const fetchNote = () => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    // const userName = getState().auth.currentUser.username;
+    return fetch(`${API_BASE_URL}/notes`).then(res => {     
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        return res.json();
+    }).then(note => {
+        console.log(note);
+        dispatch(fetchNoteSuccess(note));
+    });
+};
+
+export const createNotes = (note, title) => (dispatch, getState) => {
+const authToken = getState().auth.authToken;
+const userName = getState().auth.currentUser.username;
+dispatch(startPosting());
 return fetch(`${API_BASE_URL}/notes`, {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
     },
-    body: JSON.stringify(note)
+    body: JSON.stringify({text: note, name: title, username: userName})
 })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(console.log('This is the actions api...'))
+    .then(note => dispatch(finishPost(note)))
     .catch(err => {
         const {reason, message, location} = err;
         if (reason === 'ValidationError') {

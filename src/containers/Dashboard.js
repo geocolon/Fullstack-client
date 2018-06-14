@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
-import Nav from '../components/Nav';
+import ListDashboard from '../containers/ListDashboard';
 import {createNotes} from '../actions/notes';
 
 
@@ -18,15 +18,16 @@ export class Dashboard extends React.Component {
 
     render() {
         return (
-            <div className="dashboard">
-                <Nav />
-                <div className="dashboard-username">
+            <div>
+            <div className="container">
+                
+                {/* <div className="dashboard-username">
                     Username: {this.props.username}
                 </div>
                 <div className="dashboard-name">Name: {this.props.name}</div>
                 <div className="dashboard-protected-data">
                     Protected data: {this.props.protectedData}
-                </div>
+                </div> */}
 
                 <form
                     className="content-form"
@@ -41,13 +42,15 @@ export class Dashboard extends React.Component {
                         component="input"
                         type="text"
                         name="imageurl"
-                    />
+                    /> <br/>
                     <button
                     type="submit"
                     >
                     Submit
                     </button>
-                </form>  
+                </form>
+                <ListDashboard /> 
+                </div>
             </div>
         );
     }

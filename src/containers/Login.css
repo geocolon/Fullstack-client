@@ -6,26 +6,14 @@ form {
    margin-top: 2em;
 }
 
-button {
-    background-color: #45EBA5;
-    border-radius: 5px;
-    color: #ffffff;
-    margin-top: 3em;
-    margin-bottom: 1em;
-    width: 30%;
-    height: 40px;
-}
 
-label {
-    text-align: left;
-}
-
-label, input {
-    display: inline-block;
-    width: 50%;
-    padding: 1%;
-}
 
 .form-ptag {
     text-align: center;
+}
+
+@media only screen and (min-width: 640px) {
+    .login-form {
+        margin: 1em;
+    }
 }

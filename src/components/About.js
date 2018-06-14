@@ -6,13 +6,15 @@ import '../App.css';
 class About extends Component {
   render() {
     return (
-      <div className="container">
+    <div>
       <Nav />
+      <div className="container">
         <main>
           <h1>
             <strong>This will be About page!</strong>
           </h1>
         </main>
+        </div>
       </div>
     );
   }
