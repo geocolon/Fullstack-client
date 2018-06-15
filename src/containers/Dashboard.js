@@ -1,21 +1,21 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {Field, reduxForm, focus, reset} from 'redux-form';
 import ListDashboard from '../containers/ListDashboard';
-import {createNotes} from '../actions/notes';
-
-
-
+import {createNotes, fetchNote, deleteNote} from '../actions/notes';
 
 export class Dashboard extends React.Component {
     
-
     onSubmit(values) {
-        // console.log('This is the values',values);
-        // const {username, password, firstname, lastname} = values;
-        // const user = {username, password, firstname, lastname};
-        return this.props.dispatch(createNotes(values.imageurl, values.title));
-    }
+        
+        const stepsOneTwo = () => {
+            this.props.dispatch(createNotes(values.imageurl, values.title))
+            .then(() => this.props.dispatch(fetchNote()) )
+            // .then(() => this.props.reset() )
 
+        }
+        return stepsOneTwo()
+    }
+    
     render() {
         return (
             <div>
@@ -23,9 +23,11 @@ export class Dashboard extends React.Component {
                 
                 <form
                     className="content-form"
-                    onSubmit={this.props.handleSubmit(values =>
+                    onSubmit={
+                        this.props.handleSubmit(values => {
                         this.onSubmit(values)
-                    )}>
+                        this.props.dispatch(fetchNote())
+                    })}>
                     <label htmlFor="title">Title</label>
                     <Field component="input" type="text" name="title" />
 

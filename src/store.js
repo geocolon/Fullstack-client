@@ -9,8 +9,9 @@ import rootReducer from './reducers';
 const store = createStore(
                 rootReducer,
                 window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-                applyMiddleware(thunk)
+                applyMiddleware(thunk),
             )
+
 // Hydrate the authToken from localStorage if it exist
 const authToken = loadAuthToken();
 if (authToken) {
