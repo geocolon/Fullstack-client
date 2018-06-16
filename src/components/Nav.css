@@ -42,7 +42,16 @@ ul.topnav li.right {float: right;}
 @media screen and (max-width: 600px){
     ul.topnav li.right, 
     ul.topnav li {float: none;}
-    .hamburger {position: absolute; display: block; top:5px; right:5px;}
+    .hamburger {
+        /* background-image: url("../resource/black-ham-icon.png");
+        background-repeat:no-repeat; */
+        position: absolute;
+        display: block;
+        width: 100px;
+        height: 100px;
+        top:5px;
+        right:5px;
+    }
     .topnav {display: none;}
     .hamburger:hover + .topnav,
     .topnav:hover {
