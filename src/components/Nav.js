@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import Logout from '../containers/Logout';
-import hammenu from '../resource/black-ham-icon.png';
 import './Nav.css';
 
 class Nav extends React.Component {
@@ -12,10 +11,10 @@ class Nav extends React.Component {
         }
         return( 
             <div>
+                <div className="mobile-nav-space"></div>
                 <nav>
-                <div className="hamburger">
-                    <img src={hammenu} alt="menu" />
-                </div>
+                <button className="hamburger">
+                </button>
                 <ul className="topnav">
                     <li><Logout /></li>
                     <li className="login-status"><Link to="/signup">Sign Up</Link></li>

@@ -3,19 +3,17 @@ import Nav from './Nav';
 
 import './App.css';
 
-class About extends Component {
-  render() {
+const About = () => {
     return (
-      <div className="container">
-      <Nav />
-        <main>
-          <h1>
-            <strong>This will be About page!</strong>
-          </h1>
-        </main>
-      </div>
+      <div>
+        <Nav />
+          <main>
+            <h1>
+              <strong>This will be About page!</strong>
+            </h1>
+          </main>
+      </div>    
     );
-  }
 }
 
 export default About;

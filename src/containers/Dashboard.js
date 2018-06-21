@@ -1,7 +1,7 @@
 import React from 'react';
-import {Field, reduxForm, focus, reset} from 'redux-form';
+import {Field, reduxForm, focus } from 'redux-form';
 import ListDashboard from '../containers/ListDashboard';
-import {createNotes, fetchNote, deleteNote} from '../actions/notes';
+import {createNotes, fetchNote } from '../actions/notes';
 
 export class Dashboard extends React.Component {
     

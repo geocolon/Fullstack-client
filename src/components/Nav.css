@@ -40,21 +40,32 @@ ul.topnav li.right {float: right;}
 }
 
 @media screen and (max-width: 600px){
+    .mobile-nav-space {
+        margin: 100px 0px;
+    }
     ul.topnav li.right, 
     ul.topnav li {float: none;}
     .hamburger {
-        /* background-image: url("../resource/black-ham-icon.png");
-        background-repeat:no-repeat; */
+        background-image: url("/images/green-ham.png");
+        background-size: 50px 50px;
+        background-repeat:no-repeat;
         position: absolute;
+        color: black;
+        margin: 10px;
         display: block;
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
         top:5px;
         right:5px;
     }
     .topnav {display: none;}
-    .hamburger:hover + .topnav,
+    .hamburger:hover + .topnav, .mobile-nav-space,
+    /* .mobile-nav-space {
+        display: none;
+    } */
     .topnav:hover {
         display: block;
     }
+
+    
 }
