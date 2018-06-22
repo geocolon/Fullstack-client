@@ -9,9 +9,9 @@ export class Dashboard extends React.Component {
         
         const stepsOneTwo = () => {
             this.props.dispatch(createNotes(values.imageurl, values.title))
-            .then(() => this.props.dispatch(fetchNote()) )
-            // .then(() => this.props.reset() )
-
+            .then(() => { 
+            this.props.dispatch(fetchNote()) 
+        })
         }
         return stepsOneTwo()
     }

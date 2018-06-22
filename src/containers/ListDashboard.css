@@ -1,7 +1,15 @@
 h2 {
    text-align: center; 
 }
-
+.image-style {
+    width: 100%;
+}
+.title {
+    font-size: 70%;
+}
+.p-tag {
+    font-size: 10px;
+}
 ul {
     list-style-type: none;
     margin: 0;

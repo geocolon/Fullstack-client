@@ -22,7 +22,12 @@ class ListDashboard extends React.Component {
         let lists;
         if(this.props.lists){
             lists = this.props.lists.map((list, index) => (
-                    <div className="col-6" key={list.id}><div className="card-style"><img src={list.text} alt={list.name}/><button className="delete-btn" onClick={ () => {
+                    <div className="col-3" key={list.id}><div className="card-style">
+                    <div>
+                        <p><span className="title" >Title:</span> {list.name}</p>
+                    </div>
+                    {list.text.indexOf('http') > -1 ? <img className="image-style" src={list.text} alt={list.name}/> : <p className="p-tag">{list.text}</p> }
+                    <button className="delete-btn" onClick={ () => {
                         this.props.dispatch(deleteNote(list.id));
                     }
                 }>Delete</button></div></div>

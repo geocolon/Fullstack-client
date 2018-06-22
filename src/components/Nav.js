@@ -17,8 +17,8 @@ class Nav extends React.Component {
                 </button>
                 <ul className="topnav">
                     <li><Logout /></li>
-                    <li className="login-status"><Link to="/signup">Sign Up</Link></li>
-                    <li className="login-status"><Link to="/login">Login</Link></li>
+                    {!this.props.loggedIn && <li className="login-status"><Link to="/signup">Sign Up</Link></li> }
+                    {!this.props.loggedIn && <li className="login-status"><Link to="/login">Login</Link></li> }
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/">Home</Link></li>
                 </ul>
@@ -32,7 +32,7 @@ class Nav extends React.Component {
 const mapStateToProps = state => {
     // console.log('This is the state on Reg page',state)
     return {
-   loggedIn: state.auth.currentUser !== null
+   loggedIn: state.auth.currentUser
     }
 };
 

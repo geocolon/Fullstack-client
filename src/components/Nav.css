@@ -59,12 +59,10 @@ ul.topnav li.right {float: right;}
         right:5px;
     }
     .topnav {display: none;}
-    .hamburger:hover + .topnav, .mobile-nav-space,
-    /* .mobile-nav-space {
-        display: none;
-    } */
+    .hamburger:hover + .topnav,
     .topnav:hover {
         display: block;
+        margin-top: -100px;
     }
 
     
