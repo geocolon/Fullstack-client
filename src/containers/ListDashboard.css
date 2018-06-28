@@ -1,3 +1,4 @@
+
 h2 {
    text-align: center; 
 }
@@ -22,11 +23,12 @@ ul {
 .card-style {
     text-align: center;
     word-wrap: break-word;
-    background-color: orange;
+    border: 10px solid transparent;
+    background-image: url("/images/free-vector-watercolor-paper-texture-1.jpg");
     padding: 1%;
     width: 100%;
     border:1px solid #e5e5e5;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .list-wrapper {
