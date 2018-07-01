@@ -4,6 +4,10 @@ import {connect} from 'react-redux';
 import './ListDashboard.css';
 import '../index.css';
 
+let listMargin = {
+    margin: '10% 0 0 0'
+}
+
 class ListDashboard extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchNote());
@@ -22,22 +26,26 @@ class ListDashboard extends React.Component {
         let lists;
         if(this.props.lists){
             lists = this.props.lists.map((list, index) => (
-                    <div className="col-3" key={list.id}><div className="card-style">
-                    <div>
-                        <p><span className="title" >Title:</span> {list.name}</p>
-                    </div>
+                    <div className="col-3" key={list.id}>
+                        <div className="card-style">
+                            <div>
+                                <p>{list.name}</p>
+                            </div>
                     {list.text.indexOf('http') > -1 ? <img className="image-style" src={list.text} alt={list.name}/> : <p className="p-tag">{list.text}</p> }
                     <button className="delete-btn" onClick={ () => {
                         this.props.dispatch(deleteNote(list.id));
                     }
-                }>Delete</button></div></div>
+                }>DELETE</button>
+                        </div>
+                    </div>
             ));
         }
         
         return (
-            <div className="container">
-                <h2>Here are your notes!</h2>
-                <div className="row">{lists}</div>
+            <div style={listMargin}>
+                <div  className="">
+                    <div className="row">{lists}</div>
+                </div>
             </div>
         )
     }

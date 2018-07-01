@@ -2,9 +2,16 @@ import React from 'react';
 import {Field, reduxForm, focus } from 'redux-form';
 import ListDashboard from '../containers/ListDashboard';
 import {createNotes, fetchNote } from '../actions/notes';
+import './Dashboard.css';
+
+let divStyle = {
+    padding: '10px'
+}
+const required = value => value ? undefined : 'Required'
 
 export class Dashboard extends React.Component {
-    
+
+
     onSubmit(values) {
         
         const stepsOneTwo = () => {
@@ -18,33 +25,39 @@ export class Dashboard extends React.Component {
     
     render() {
         return (
-            <div>
-            <div className="container">
-                
-                <form
-                    className="content-form"
-                    onSubmit={
-                        this.props.handleSubmit(values => {
-                        this.onSubmit(values)
-                        this.props.dispatch(fetchNote())
-                    })}>
-                    <label htmlFor="title">Title</label>
-                    <Field component="input" type="text" name="title" />
+            <div style={divStyle} className="dash-background">
+                <div className="col-12">
+                    <div className="form-background">
+                        <form
+                            className="content-form"
+                            onSubmit={
+                                this.props.handleSubmit(values => {
+                                this.onSubmit(values)
+                                this.props.dispatch(fetchNote())
+                            })}>
+                            <label htmlFor="title">Sticky Title</label>
+                            <Field className="titlenote" component="input" type="text" name="title" validate={required} />
 
-                    <label htmlFor="imageurl">Image URL</label>
-                    <Field
-                        component="input"
-                        type="text"
-                        name="imageurl"
-                    /> <br/>
-                    <button
-                    type="submit"
-                    >
-                    Submit
-                    </button>
-                </form>
+                            <label htmlFor="imageurl">Text or image URL</label>
+                            <Field
+                                className="note"
+                                component="textarea"
+                                type="text"
+                                name="imageurl"
+                                validate={required}
+                            /> <br/>
+                            <center>
+                                <button
+                                type="submit"
+                                >
+                                Submit
+                                </button>
+                            </center>    
+                        </form>
+                        </div>
+                    </div>
                 <ListDashboard /> 
-                </div>
+                
             </div>
         );
     }
