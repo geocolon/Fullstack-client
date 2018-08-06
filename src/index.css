@@ -3,6 +3,9 @@ html {
   /* background-color: #1D566E; */
   /* font-size: 2vw; */
 }
+body {
+  height: 100%;
+}
 
 button {
   background-color: #45EBA5;
@@ -84,7 +87,7 @@ body {
   max-width: 1000px;
   padding-left: 20px;
   padding-right: 20px;
-  margin: 10px auto;
+  margin: 0px auto;
 }
 
 /* Clearfix */
